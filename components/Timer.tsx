@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import WakeLock from './WakeLock'
 
 type TimerProps = {
@@ -12,8 +12,6 @@ type TimerProps = {
 }
 
 export default function Timer({ id, name, duration, timeLeft, isRunning, updateTimer, deleteTimer }: TimerProps) {
-    const [showFirework, setShowFirework] = useState(false)
-
     useEffect(() => {
         let interval: NodeJS.Timeout
 
@@ -23,8 +21,6 @@ export default function Timer({ id, name, duration, timeLeft, isRunning, updateT
             }, 1000)
         } else if (timeLeft === 0) {
             updateTimer(id, { isRunning: false })
-            setShowFirework(true)
-            setTimeout(() => setShowFirework(false), 5000) // Hide firework after 3 seconds
         }
 
         return () => clearInterval(interval)
@@ -44,7 +40,6 @@ export default function Timer({ id, name, duration, timeLeft, isRunning, updateT
     const handleStop = () => updateTimer(id, { isRunning: false })
     const handleReset = () => {
         updateTimer(id, { timeLeft: duration, isRunning: false })
-        setShowFirework(false)
     }
 
     return (

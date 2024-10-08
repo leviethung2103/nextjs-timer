@@ -1,16 +1,15 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 export default function WakeLock({ isRunning }: { isRunning: boolean }) {
-    const [wakeLock, setWakeLock] = useState<WakeLockSentinel | null>(null)
-
     useEffect(() => {
+        let wakeLock: WakeLockSentinel | null = null;
+
         const requestWakeLock = async () => {
             if (isRunning && 'wakeLock' in navigator) {
                 try {
-                    const lock = await navigator.wakeLock.request('screen')
-                    setWakeLock(lock)
+                    wakeLock = await navigator.wakeLock.request('screen')
                 } catch (err) {
                     console.error(`Failed to request wake lock: ${err}`)
                 }
@@ -22,7 +21,7 @@ export default function WakeLock({ isRunning }: { isRunning: boolean }) {
         return () => {
             if (wakeLock) {
                 wakeLock.release()
-                setWakeLock(null)
+                    .catch(err => console.error(`Failed to release wake lock: ${err}`))
             }
         }
     }, [isRunning])
