@@ -2,21 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  color: var(--foreground);
-  background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -24,4 +10,236 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 7%;
+    --card-foreground: 0 0% 98%;
+    --input: 240 5% 20%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+textarea {
+  background-color: hsl(var(--input));
+  color: hsl(var(--foreground));
+  border: 1px solid hsl(var(--border));
+  padding: 0.5rem;
+  border-radius: var(--radius);
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+
+@keyframes explode {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
+
+/* .firework {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+} */
+
+.firework {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+  /* Ensure it's on top of other elements */
+}
+
+/* .explosion {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: #ff0;
+  box-shadow: 0 0 10px #ff0;
+  animation: explode 1s ease-out infinite;
+} */
+
+.explosion {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  /* Increase size for better visibility */
+  height: 8px;
+  /* Increase size for better visibility */
+  border-radius: 50%;
+  background-color: #ff0;
+  box-shadow: 0 0 20px #ff0, 0 0 40px #ff0;
+  /* Add more glow */
+  animation: explode 1.5s ease-out infinite;
+  /* Slow down the animation */
+}
+
+.explosion:nth-child(1) {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.explosion:nth-child(2) {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.explosion:nth-child(3) {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.explosion:nth-child(4) {
+  transform: translate(-50%, -50%) rotate(135deg);
+}
+
+.explosion:nth-child(5) {
+  transform: translate(-50%, -50%) rotate(180deg);
+}
+
+.explosion:nth-child(6) {
+  transform: translate(-50%, -50%) rotate(225deg);
+}
+
+.explosion:nth-child(7) {
+  transform: translate(-50%, -50%) rotate(270deg);
+}
+
+.explosion:nth-child(8) {
+  transform: translate(-50%, -50%) rotate(315deg);
+}
+
+.btn-start {
+  background-color: hsl(142, 71%, 45%);
+  color: hsl(0, 0%, 98%);
+}
+
+.btn-stop {
+  background-color: hsl(0, 84%, 60%);
+  color: hsl(0, 0%, 98%);
+}
+
+.btn-reset {
+  background-color: hsl(217, 91%, 60%);
+  color: hsl(0, 0%, 98%);
+}
+
+.btn-delete {
+  background-color: hsl(220, 9%, 46%);
+  color: hsl(0, 0%, 98%);
+}
+
+input[type="text"],
+input[type="number"] {
+  background-color: hsl(var(--input));
+  color: hsl(var(--foreground));
+  border: 1px solid hsl(var(--border));
+}
+
+.card {
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  color: hsl(var(--card-foreground));
+}
+
+.card label {
+  color: hsl(var(--card-foreground));
+}
+
+input[type="text"],
+input[type="number"] {
+  background-color: hsl(var(--input));
+  color: hsl(var(--foreground));
+  border: 1px solid hsl(var(--border));
+}
+
+.card {
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  color: hsl(var(--card-foreground));
+}
+
+.card label {
+  color: hsl(var(--card-foreground));
 }
